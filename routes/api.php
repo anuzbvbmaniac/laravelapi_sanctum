@@ -8,9 +8,6 @@ use Illuminate\Validation\ValidationException;
 
 Route::post('/login', 'Api\AuthController@login');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 //Route::get('categories', 'Api\CategoryController@index');
 //Route::get('categories/{category}', 'Api\CategoryController@show');
@@ -22,5 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('categories', 'Api\CategoryController'); // Has 5 methods
-    Route::get('products', 'Api\ProductController@index');
+    Route::get('/products', 'Api\ProductController@index');
+    Route::post('/logout', 'Api\AuthController@logout');
 });
